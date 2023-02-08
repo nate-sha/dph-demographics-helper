@@ -14,7 +14,7 @@ export async function getHispanicData(state, place) {
   }, 0);
   return [
     {
-      name: '11-2. Residents of Hispanic origin in the facility service area?',
+      label: 'Total Hispanic or Latino',
       numberOfResidents: sum,
       percentOfTotalResidents: Math.round(parseInt((sum / total) * 100))
     }
@@ -44,32 +44,32 @@ export async function getRaceData(state, place) {
   );
   return [
     {
-      name: 'American Indian and Alaska Native',
+      label: 'American Indian and Alaska Native',
       numberOfResidents: aggregate[1],
       percentOfTotalResidents: Math.round(parseInt((aggregate[1] / aggregate[0]) * 100))
     },
     {
-      name: 'Asian',
+      label: 'Asian',
       numberOfResidents: aggregate[2],
       percentOfTotalResidents: Math.round(parseInt((aggregate[2] / aggregate[0]) * 100))
     },
     {
-      name: 'Black',
+      label: 'Black',
       numberOfResidents: aggregate[3],
       percentOfTotalResidents: Math.round(parseInt((aggregate[3] / aggregate[0]) * 100))
     },
     {
-      name: 'Native Hawaiian and Other Pacific Islander',
+      label: 'Native Hawaiian and Other Pacific Islander',
       numberOfResidents: aggregate[4],
       percentOfTotalResidents: Math.round(parseInt((aggregate[4] / aggregate[0]) * 100))
     },
     {
-      name: 'White',
+      label: 'White',
       numberOfResidents: aggregate[5],
       percentOfTotalResidents: Math.round(parseInt((aggregate[5] / aggregate[0]) * 100))
     },
     {
-      name: 'Other',
+      label: 'Other',
       numberOfResidents: aggregate[6],
       percentOfTotalResidents: Math.round(parseInt((aggregate[6] / aggregate[0]) * 100))
     }

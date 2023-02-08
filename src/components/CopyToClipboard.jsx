@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { useSnackbar } from 'notistack';
-import { IconButton, Tooltip } from '@mui/material';
-import { FileCopy } from '@mui/icons-material';
+import { Button, Tooltip } from '@mui/material';
 
 const CopyToClipboard = ({ text }) => {
   const { enqueueSnackbar } = useSnackbar();
@@ -15,9 +14,7 @@ const CopyToClipboard = ({ text }) => {
 
   return (
     <Tooltip title="Copy">
-      <IconButton onClick={copyToClipboard}>
-        <FileCopy />
-      </IconButton>
+      <Button onClick={copyToClipboard}>{text}</Button>
     </Tooltip>
   );
 };

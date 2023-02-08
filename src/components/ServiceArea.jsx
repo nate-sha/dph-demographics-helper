@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Stack, Backdrop, CircularProgress, Autocomplete, TextField } from '@mui/material';
+import { Box, Stack, Autocomplete, TextField, Typography } from '@mui/material';
+import { SettingsContext } from '../contexts/settingsContext';
 import getStates from '../api/getStates';
 import getCities from '../api/getCities';
 import MultiselectAutocomplete from './MultiselectAutocomplete';
-import { SettingsContext } from '../contexts/settingsContext';
 
 const ServiceArea = () => {
   const [settings, setSettings] = useContext(SettingsContext);
@@ -41,61 +41,69 @@ const ServiceArea = () => {
     });
   };
 
-  if (states.isLoading) {
-    return (
-      <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={states.isLoading}>
-        <CircularProgress color="inherit" />
-      </Backdrop>
-    );
-  }
-
   if (states.error || cities.error) {
     return <div>Error: {states.error.message}</div>;
   }
 
   return (
-    <Stack
-      spacing={2}
+    <Box
       sx={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
         padding: 2,
-        margin: 'auto',
-        maxWidth: 400
+        margin: 'auto'
       }}>
-      <Autocomplete
-        fullWidth
-        name="state"
-        id="state"
-        loading={states.isLoading}
-        options={states.data.map((option) => option.name)}
-        value={settings.state.name}
-        onChange={handleStateChange}
-        size="large"
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Search for a state"
-            InputProps={{
-              ...params.InputProps
-            }}
+      <Box>
+        <Typography
+          variant="h6"
+          sx={{
+            fontWeight: 'bold'
+          }}>
+          Service Area
+        </Typography>
+        <Typography variant="body1">
+          Select your state and <strong>top 15 cities</strong> to see the demographics of your
+          service area.
+        </Typography>
+      </Box>
+      <Box>
+        <Stack
+          spacing={2}
+          sx={{
+            padding: 2,
+            margin: 'auto',
+            width: 400
+          }}>
+          <Autocomplete
+            fullWidth
+            name="state"
+            id="state"
+            loading={states.isLoading}
+            options={states.data?.map((option) => option.name) || []}
+            value={settings.state.name}
+            onChange={handleStateChange}
+            size="large"
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Search for a state"
+                InputProps={{
+                  ...params.InputProps
+                }}
+              />
+            )}
           />
-        )}
-      />
-      <MultiselectAutocomplete
-        name="city"
-        errorText="Leave blank to select all cities"
-        loading={cities.isLoading}
-        options={cities.data || []}
-        value={settings.city}
-        handleChange={handleChange}
-        label="Cities"
-        size="large"
-      />
-    </Stack>
+          <MultiselectAutocomplete
+            name="city"
+            errorText="Leave blank to select all cities"
+            loading={cities.isLoading}
+            options={cities.data || []}
+            value={settings.city}
+            handleChange={handleChange}
+            label="Cities"
+            size="large"
+          />
+        </Stack>
+      </Box>
+    </Box>
   );
 };
 

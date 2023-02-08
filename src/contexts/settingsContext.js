@@ -11,8 +11,6 @@ export const SettingsProvider = ({ children }) => {
     },
     city: []
   });
-  // Save the settings to local storage
-  sessionStorage.setItem('settings', JSON.stringify(settings));
   return (
     <SettingsContext.Provider value={[settings, setSettings]}>{children}</SettingsContext.Provider>
   );

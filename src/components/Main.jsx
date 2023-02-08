@@ -1,10 +1,14 @@
 import { Container } from '@mui/material';
-import Stepper from './Stepper';
+import HorizontalLinearStepper from './Stepper';
 
 function Main() {
   return (
-    <Container>
-      <Stepper />
+    <Container
+      maxWidth="md"
+      sx={{
+        my: 2
+      }}>
+      <HorizontalLinearStepper />
     </Container>
   );
 }
